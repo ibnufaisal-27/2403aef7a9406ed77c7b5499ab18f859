@@ -7,45 +7,73 @@ Aplikasi ini dibuat dengan menggunakan Framework Laravel, yang digunakan untuk m
 
 ## How to use
 - Clone repo https://github.com/ibnufaisal-27/2403aef7a9406ed77c7b5499ab18f859.git
-- Copy environment dari .env.example dengan menggunakan perintah cp .env.example .env
+- Copy environment dari ```.env.example``` dengan menggunakan perintah ```cp .env.example .env```
+- Sesuaikan beberapa configan untuk koneksi database.
+  ```
+  DB_CONNECTION=pgsql
+  DB_HOST=db
+  DB_PORT=5432
+  DB_DATABASE=ibnu-app
+  DB_USERNAME=
+  DB_PASSWORD=
+  ```
+  Note : pada bagian ```db_host``` isikan dengan nama container yang ada pada file ```docker-compose.yml```
+- Tambahkan key dan value ```QUEUE_CONNECTION=database``` pada file ```.env``` untuk koneksi queue
+- Jalankan container database , dengan menggunakan perintah ```docker compose up -d db```
+- Build applikasi ke dalam docker dengan menggunakan perintah ```docker compose build```
+- Jalankan aplikasi dengan menggunakan perintah ```docker compose up```
+- Jalankan migrasi table dengan menggunakan perintah ```docker exec -d [nama container] php artisan migrate``` .
+  Contoh : ```docker exec -d ibnuapp php artisan migrate```
+- Inisiasi oauth client dengan menjalankan perintah ```docker exec -d [nama container] php artisan passport:client --personal``` 
+  Contoh : ```docker exec -d ibnuapp php artisan passport:client --personal```
+- Jalankan worker dengan perintah ```docker exec -d [nama container] php artisan queue:work```
+  Contoh : ```docker exec -d ibnuapp php artisan queue:work```
 
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Penggunaan Aplikasi
+sebelum menggunakan applikasi, harus terdaftar sebagai user dan login untuk mendapatkan token dari oauth , agar bisa menggunakan API send email.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 1. Register User
+URL : [base_url]/api/register
+Method : POST
+Body Payload :
+```
+{
+ "email" : "mibnufaisal2@gmail.com",
+ "name" : "Ibnu",
+ "password" : "bismillah"
+}
+```
+<img src="https://i.ibb.co/z518Nnc/Screenshot-from-2023-12-26-07-56-45.png" alt="register-user">
 
-## Laravel Sponsors
+### 2. Login User
+URL : [base_url]/api/user/login
+Method : POST
+Body Payload :
+```
+{
+ "email" : "mibnufaisal2@gmail.com",
+ "password" : "bismillah"
+}
+```
+<img src="https://i.ibb.co/gJLkg5d/Screenshot-from-2023-12-26-08-19-12.png" alt="login-user">
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 3. API Send Email
+URL : [base_url]/api/send-email
+Method : POST
+Authorization : Bearer Token
+Body Payload :
+```
+{
+    "email": "mibnufaisal@mailinator.com",
+    "subject": "Hallo",
+    "body": "Hallo !"
+}
+```
+Header:
+<img src="https://i.ibb.co/4KVqHyT/Screenshot-from-2023-12-26-08-23-11.png" alt="header-send-email">
 
-### Premium Partners
+Success Send Email:
+<img src="https://i.ibb.co/pfNVYxS/Screenshot-from-2023-12-26-08-26-38.png" alt="send-email">
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Error Handling
