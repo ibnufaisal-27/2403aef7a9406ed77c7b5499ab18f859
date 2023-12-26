@@ -22,11 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('auth/register', \App\Http\Controllers\Api\Auth\RegisterController::class);
-Route::post('auth/login', \App\Http\Controllers\Api\Auth\LoginController::class);
-
-Route::middleware('auth:api')->post('/send-email-api', [SendEmailController::class, 'sendEmail']);
-
 Route::group(['middleware' => ['auth:api']], function (){
     Route::get('/user', [UserController::class, 'profile']);
     Route::patch('/user', [UserController::class, 'patch']);
