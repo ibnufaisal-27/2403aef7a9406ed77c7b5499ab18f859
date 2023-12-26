@@ -70,7 +70,7 @@ class UserController extends Controller
     } else {
 
       return response()->json([
-        'error' => 'Email atau Password alah',
+        'error' => 'Email atau Password Salah',
         'status' => false
       ], 401);
 

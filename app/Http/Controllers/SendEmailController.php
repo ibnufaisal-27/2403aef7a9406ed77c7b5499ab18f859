@@ -27,7 +27,7 @@ class SendEmailController extends Controller
         
         $inputRequest = $request->input();
         $validator = Validator::make($inputRequest, [
-        'email'     => 'unique:users,email|required|string',
+        'email'     => 'email|required|string',
         'subject'   => 'required',
     ]);
 

@@ -78,6 +78,14 @@ Success Send Email:
 <img src="https://i.ibb.co/ftsYH9f/Screenshot-from-2023-12-26-09-41-32.png" alt="send-email-success">
 
 ## Error Handling
-### 1. Send Email Without Auth
+### 1. Login with invalid password
+Login with invalid password, will get 401 Unauthorization respond
+<img src="https://i.ibb.co/KLTrSyc/Screenshot-from-2023-12-26-10-24-41.png" alt="login-401">
+
+### 2. Send Email Without Auth
 Send email without auth, will get 401 Unauthorization respond
-<img src="https://i.ibb.co/jvtMVDd/Screenshot-from-2023-12-26-08-38-50.png" alt="send-email">
+<img src="https://i.ibb.co/jvtMVDd/Screenshot-from-2023-12-26-08-38-50.png" alt="send-email-401">
+
+### 3. Send Email With Invalid Email Format
+Send email with invalid email format, will get 400 Bad Request respond
+<img src="https://i.ibb.co/n3kfb0t/Screenshot-from-2023-12-26-10-20-37.png" alt="send-email-400">
