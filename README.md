@@ -75,6 +75,7 @@ Header:
 
 Success Send Email:
 <img src="https://i.ibb.co/pfNVYxS/Screenshot-from-2023-12-26-08-26-38.png" alt="send-email">
+<img src="https://i.ibb.co/ftsYH9f/Screenshot-from-2023-12-26-09-41-32.png" alt="send-email-success">
 
 ## Error Handling
 ### 1. Send Email Without Auth
