@@ -76,4 +76,7 @@ Header:
 Success Send Email:
 <img src="https://i.ibb.co/pfNVYxS/Screenshot-from-2023-12-26-08-26-38.png" alt="send-email">
 
-### Error Handling
+## Error Handling
+### 1. Send Email Without Auth
+Send email without auth, will get 401 Unauthorization respond
+<img src="https://i.ibb.co/jvtMVDd/Screenshot-from-2023-12-26-08-38-50.png" alt="send-email">
